@@ -17,7 +17,7 @@ function authJwt() {
         methods: ["GET", "OPTIONS"],
       },
       `${api}/users/login/`,
-      `${api}/users/login/`,
+      `${api}/users/register/`,
     ],
   });
 }
