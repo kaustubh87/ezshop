@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 require("dotenv/config");
 const authJwt = require("./helper/jwt.js");
+const errorHandler = require("./helper/error-handler.js");
 
 app.use(cors());
 app.options("*", cors);
@@ -14,6 +15,7 @@ const api = process.env.API_URL;
 app.use(express.json());
 app.use(morgan("tiny"));
 app.use(authJwt());
+app.use(errorHandler);
 
 //outes
 const categoriesRoutes = require("./routes/categories");
