@@ -66,4 +66,25 @@ router.post("/login", async (req, res) => {
   }
 });
 
+router.post("/register", async (req, res) => {
+  let user = new User({
+    name: req.body.name,
+    email: req.body.email,
+    passwordHash: bcrypt.hashSync(req.body.passwordHash, 10),
+    phone: req.body.phone,
+    isAdmin: req.body.isAdmin,
+    apartment: req.body.apartment,
+    street: req.body.street,
+    zip: req.body.zip,
+    city: req.body.city,
+    country: req.body.country,
+  });
+
+  user = await user.save();
+  if (!user) {
+    return res.status(404).send("The User cannot be registered");
+  }
+  res.send(user);
+});
+
 module.exports = router;
