@@ -6,6 +6,7 @@ function authJwt() {
   return jwt({
     secret,
     algorithms: ["HS256"],
+    isRevoked: isRevoked,
   }).unless({
     path: [
       {
@@ -20,6 +21,13 @@ function authJwt() {
       `${api}/users/register/`,
     ],
   });
+}
+
+async function isRevoked(req, payload, done) {
+  if (!payload.isAdmin) {
+    done(null, true);
+  }
+  done();
 }
 
 module.exports = authJwt;
