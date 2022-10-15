@@ -13,15 +13,15 @@ router.get("/", async (req, res) => {
 });
 
 router.get("/get/count", async (req, res) => {
-  console.log("user count");
-  // const userCount = await User.countDocuments(); // Get user count
-  // console.log("user count " + userCount);
-  // if (!userCount) {
-  //   res.status(500).json({ success: false });
-  // }
-  // res.send({
-  //   userCount: userCount,
-  // });
+  // console.log("user count");
+  const userCount = await User.countDocuments(); // Get user count
+  console.log("user count " + userCount);
+  if (!userCount) {
+    res.status(500).json({ success: false });
+  }
+  res.send({
+    userCount: userCount,
+  });
 });
 
 router.get("/:id", async (req, res) => {

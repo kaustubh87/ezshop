@@ -14,7 +14,7 @@ const api = process.env.API_URL;
 //Middleware
 app.use(express.json());
 app.use(morgan("tiny"));
-app.use(authJwt());
+// app.use(authJwt());
 app.use(errorHandler);
 
 //outes
