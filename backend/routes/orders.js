@@ -62,4 +62,37 @@ router.post("/", async (req, res) => {
   res.send(order);
 });
 
+router.put("/:id", async (req, res) => {
+  const order = await Order.findByIdAndUpdate(
+    req.params.id,
+    {
+      status: req.body.status,
+    },
+    { new: true } // to return new updated data
+  );
+
+  if (!order) {
+    return res.status(404).send("The Order cannot be created");
+  }
+  res.send(order);
+});
+
+router.delete("/:id", (req, res) => {
+  Order.findByIdAndRemove(req.params.id)
+    .then((deletedOrder) => {
+      if (deletedOrder) {
+        return res
+          .status(200)
+          .json({ success: true, message: "The order is deleted" });
+      } else {
+        return res
+          .status(404)
+          .json({ success: false, message: "Order not found" });
+      }
+    })
+    .catch((err) => {
+      return res.status(400).json({ success: false, error: err });
+    });
+});
+
 module.exports = router;
